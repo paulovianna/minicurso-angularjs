@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="loja">
+  <head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body class="container" ng-controller="LojaController as loja">
+    <div class="produto row" ng-hide="loja.produto.semEstoque">
+      <h3>
+        {{loja.produto.nome}}
+        <em class="pull-right">${{loja.produto.preco}}</em>
+      </h3>
+      <button ng-show="loja.produto.compravel">Adicionar ao Carrinho</button>
+    </div>
+  </body>
+</html>
