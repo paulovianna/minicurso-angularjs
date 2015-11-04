@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="loja">
+  <head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body class="list-group" ng-controller="LojaController as loja">
+    <!--  Product Container  -->
+    <div class="list-group-item" ng-repeat="produto in loja.produtos">
+      <h3>{{produto.nome}} <em class="pull-right">{{produto.preco | currency}}</em></h3>
+
+      <!-- Image Gallery  -->
+      <div class="gallery">
+        <div class="img-wrap">
+          <img ng-src="{{produto.imagens[0]}}" />
+        </div>
+        <ul class="img-thumbnails clearfix">
+          <li class="small-image pull-left thumbnail" ng-repeat="imagem in produto.imagens">
+            <img ng-src="{{imagem}}" />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
