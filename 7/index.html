@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="loja">
+  <head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="app.css" />
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body ng-controller="LojaController as loja">
+    <header>
+      <h1 class="text-center">Loja de Exemplo</h1>
+      <h2 class="text-center">– Minicurso AngularJS –</h2>
+    </header>
+    <div class="list-group">
+      <div class="list-group-item" ng-repeat="produto in loja.produtos">
+        <h3>{{produto.nome}} <em class="pull-right">{{produto.preco | currency}}</em></h3>
+        <section ng-show="produto.imagens.length">
+          <img ng-src="{{produto.imagens[0]}}" />
+          <ul class="list-inline thumbs">
+            <li class="thumbnail" ng-repeat="imagem in produto.imagens">
+              <img ng-src="{{imagem}}" />
+            </li>
+          </ul>
+        </section>
+        <section ng-controller="AbaController as aba">
+          <ul class="nav nav-pills">
+            <li ng-class="{ active:aba.isSet(1) }">
+              <a href ng-click="aba.setAba(1)">Descrição</a>
+            </li>
+            <li ng-class="{ active:tab.isSet(2) }">
+              <a href ng-click="aba.setAba(2)">Especificações</a>
+            </li>
+            <li ng-class="{ active:aba.isSet(3) }">
+              <a href ng-click="aba.setAba(3)">Comentários</a>
+            </li>
+          </ul>
+          <div ng-show="aba.isSet(1)">
+            <h4>Descrição</h4>
+            <blockquote>{{produto.descricao}}</blockquote>
+          </div>
+          <div ng-show="aba.isSet(2)">
+            <h4>Especificações</h4>
+            <blockquote>Cor: {{produto.cor}}</blockquote>
+          </div>
+          <div ng-show="aba.isSet(3)">
+            <ul>
+              <h4>Comentários</h4>
+              <li ng-repeat="comentario in produto.comentarios">
+                <blockquote>
+                  <strong>{{comentario.estrelas}} Estrelas</strong>
+                  {{comentario.conteudo}}
+                  <cite class="clearfix">—{{comentario.autor}} em {{comentario.criadoEm | date}}</cite>
+                </blockquote>
+              </li>
+            </ul>
+            <form name="comentarioForm" ng-controller="ComentarioController as comentarioCtrl" ng-submit="comentarioCtrl.addComentario(produto)">
+              <blockquote >
+                <strong>{{comentarioCtrl.comentario.estrelas}} Estrelas</strong>
+                {{comentarioCtrl.comentario.conteudo}}
+                <cite class="clearfix">—{{comentarioCtrl.comentario.author}}</cite>
+              </blockquote>
+              <h4>Submeter Comentário</h4>
+              <fieldset class="form-group">
+                <select ng-model="comentarioCtrl.comentario.estrelas" class="form-control" ng-options="estrelas for estrelas in [5,4,3,2,1]" title="Estrelas">
+                  <option value>Avalie o Produto</option>
+                </select>
+              </fieldset>
+              <fieldset class="form-group">
+                <textarea ng-model="comentarioCtrl.comentario.conteudo" class="form-control" placeholder="Escreva um breve comentário sobre o produto" title="Comentário"></textarea>
+              </fieldset>
+              <fieldset class="form-group">
+                <input ng-model="comentarioCtrl.comentario.autor" type="email" class="form-control" placeholder="usuario@exemplo.com" title="Email" />
+              </fieldset>
+              <fieldset class="form-group">
+                <input type="submit" class="btn btn-primary pull-right" value="Submeter Comentário" />
+              </fieldset>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
