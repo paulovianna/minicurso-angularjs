@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="loja">
+  <head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body class="list-group" ng-controller="LojaController as loja">
+    <header>
+      <h1 class="text-center">Loja de Exemplo</h1>
+      <h2 class="text-center">– Minicurso AngularJS –</h2>
+    </header>
+    <div class="list-group-item" ng-repeat="produto in loja.produtos">
+      <h3>
+        {{produto.nome}}
+        <em class="pull-right">{{produto.preco | currency}}</em>
+      </h3>
+      <section ng-show="produto.imagens.length">
+        <img ng-src="{{produto.imagens[0]}}" />
+        <ul class="list-inline thumbs">
+          <li class="thumbnail" ng-repeat="imagem in produto.imagens">
+            <img ng-src="{{imagem}}" />
+          </li>
+        </ul>
+      </section>
+
+      <section class="tab" ng-controller="AbaController as aba">
+        <ul class="nav nav-pills">
+          <li ng-class="{active:aba.isSet(1)}">
+            <a href ng-click="aba.setAba(1)">Descrição</a></li>
+          <li ng-class="{active:aba.isSet(2)}">
+            <a href ng-click="aba.setAba(2)">Especificações</a></li>
+          <li ng-class="{active:aba.isSet(3)}">
+            <a href ng-click="aba.setAba(3)">Comentários</a></li>
+        </ul>
+         <div ng-show="aba.isSet(1)">
+           <h4>Descrição</h4>
+           <blockquote>{{produto.descricao}}</blockquote>
+        </div>
+        <div ng-show="aba.isSet(2)">
+          <h4>Especificações</h4>
+          <blockquote>Cor: {{produto.cor}}</blockquote>
+        </div>
+        <div ng-show="aba.isSet(3)">
+          <h4>Comentários</h4>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
