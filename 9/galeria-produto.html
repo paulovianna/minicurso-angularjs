@@ -1,0 +1,8 @@
+<div ng-show="produto.imagens.length">
+  <img ng-src="{{produto.imagens[0]}}" />
+  <ul class="list-inline thumbs">
+    <li class="thumbnail" ng-repeat="imagem in produto.imagens">
+      <img ng-src="{{imagem}}" />
+    </li>
+  </ul>
+</div>
