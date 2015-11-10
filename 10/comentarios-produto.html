@@ -1,0 +1,32 @@
+<ul>
+    <h4>Comentários</h4>
+    <li ng-repeat="comentario in produto.comentarios">
+      <blockquote>
+        <strong>{{comentario.estrelas}} Estrelas</strong>
+        {{comentario.conteudo}}
+        <cite class="clearfix">—{{comentario.autor}} em {{comentario.criadoEm | date}}</cite>
+      </blockquote>
+    </li>
+  </ul>
+  <form name="comentarioForm" ng-controller="ComentarioController as comentarioCtrl" ng-submit="comentarioCtrl.addComentario(produto)">
+    <blockquote >
+      <strong>{{comentarioCtrl.comentario.estrelas}} Estrelas</strong>
+      {{comentarioCtrl.comentario.conteudo}}
+      <cite class="clearfix">—{{comentarioCtrl.comentario.autor}}</cite>
+    </blockquote>
+    <h4>Submeter Comentário</h4>
+    <fieldset class="form-group">
+      <select ng-model="comentarioCtrl.comentario.estrelas" class="form-control" ng-options="estrelas for estrelas in [5,4,3,2,1]" title="Estrelas">
+        <option value>Avalie o Produto</option>
+      </select>
+    </fieldset>
+    <fieldset class="form-group">
+      <textarea ng-model="comentarioCtrl.comentario.conteudo" class="form-control" placeholder="Escreva um breve comentário sobre o produto" title="Comentário"></textarea>
+    </fieldset>
+    <fieldset class="form-group">
+      <input ng-model="comentarioCtrl.comentario.autor" type="email" class="form-control" placeholder="usuario@exemplo.com" title="Email" />
+    </fieldset>
+    <fieldset class="form-group">
+      <input type="submit" class="btn btn-primary pull-right" value="Submeter Comentário" />
+    </fieldset>
+  </form>
