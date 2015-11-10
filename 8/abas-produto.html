@@ -1,0 +1,17 @@
+<section>
+  <ul class="nav nav-pills">
+    <li ng-class="{ active:aba.isSet(1) }">
+      <a href ng-click="aba.setAba(1)">Descrição</a>
+    </li>
+    <li ng-class="{ active:aba.isSet(2) }">
+      <a href ng-click="aba.setAba(2)">Especificações</a>
+    </li>
+    <li ng-class="{ active:aba.isSet(3) }">
+      <a href ng-click="aba.setAba(3)">Comentários</a>
+    </li>
+  </ul>
+  <div ng-show="aba.isSet(1)" ng-include="'descricao-produto.html'">
+  </div>
+  <div especificacoes-produto ng-show="aba.isSet(2)"></div>
+  <comentarios-produto ng-show="aba.isSet(3)"></comentarios-produto>
+</section>
